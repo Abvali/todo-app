@@ -1,14 +1,23 @@
-import { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 export const TodoContext = createContext();
 
 export function TodoProvider({ children }) {
-  const [todos, setTodos] = useState([
-    { id: 1, text: "Learn React basics", done: true },
-    { id: 2, text: "Practice ReactJS", done: false },
-  ]);
+  const [todos, setTodos] = useState(() => {
+    const saved = localStorage.getItem("todos");
+    return saved
+      ? JSON.parse(saved)
+      : [
+          { id: 1, text: "Learn React basics", done: true },
+          { id: 2, text: "Practice ReactJS", done: false },
+        ];
+  });
 
   const [filter, setFilter] = useState("all");
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   function addTodo(text) {
     if (!text.trim()) return;

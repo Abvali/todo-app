@@ -1,10 +1,16 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { TodoContext } from "../context/TodoContext";
 
 function TodoItem({ id, text, done }) {
   const { deleteTodo, toggleTodo, editTodo } = useContext(TodoContext);
   const [isEditing, setIsEditing] = useState(false);
   const [newText, setNewText] = useState(text);
+
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (isEditing) inputRef.current?.focus();
+  }, [isEditing]);
 
   function handleSave() {
     editTodo(id, newText);

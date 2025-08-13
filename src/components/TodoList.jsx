@@ -3,14 +3,8 @@ import { TodoContext } from "../context/TodoContext";
 import { useContext } from "react";
 
 function TodoList() {
-  const {
-    todos,
-    deleteDoneTodo,
-    deleteAllTodo,
-    filteredTodos,
-    filter,
-    setFilter,
-  } = useContext(TodoContext);
+  const { deleteDoneTodo, deleteAllTodo, filteredTodos, setFilter } =
+    useContext(TodoContext);
   return (
     <div>
       <h1 className="text-2xl font-bold">Todo List</h1>
