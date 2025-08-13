@@ -26,6 +26,7 @@ function TodoItem({ id, text, done }) {
             type="text"
             value={newText}
             onChange={(e) => setNewText(e.target.value)}
+            ref={inputRef}
           />
         ) : (
           <span
